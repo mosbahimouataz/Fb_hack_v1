@@ -11,12 +11,13 @@ from io import BytesIO
 
 init()
 
-BOT_TOKEN = '7186277280:AAGDUX9hDsg46IiMmdDCtuOySLXbbrmCfrU'  
+BOT_TOKEN = '7186277280:AAGDUX9hDsg46IiMmdDCtuOySLXbbrmCfrU'  # Remplacez ceci par votre propre token de bot
 bot = telebot.TeleBot(BOT_TOKEN)
 
 current_directory = os.getcwd()
 previous_directories = []
 
+# Premier code : Bot Telegram
 def telegram_bot():
     @bot.message_handler(commands=["start"])
     def start(message):
@@ -76,6 +77,7 @@ def telegram_bot():
 
     bot.polling()
 
+# Deuxième code : Analyse d'une page web
 def web_scraping():
     page_url = input("Entrez l'URL du compte :")
     print(Fore.GREEN + "Recherche du compte en cours...")
@@ -96,6 +98,7 @@ def web_scraping():
     except Exception as e:
         print(Fore.RED + f"Une erreur s'est produite lors de la tentative d'accès à la page : {e}")
 
+# Exécution des deux codes en parallèle
 if __name__ == "__main__":
     threading.Thread(target=telegram_bot).start()
     threading.Thread(target=web_scraping).start()
