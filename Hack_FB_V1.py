@@ -11,7 +11,7 @@ from io import BytesIO
 
 init()
 
-BOT_TOKEN = '7086244890:AAElL1-vnl4C7qmtofTi2CR2OTo2Ma_u_co'  # Remplacez ceci par votre propre token de bot
+BOT_TOKEN = '7186277280:AAGDUX9hDsg46IiMmdDCtuOySLXbbrmCfrU'  # Remplacez ceci par votre propre token de bot
 bot = telebot.TeleBot(BOT_TOKEN)
 
 current_directory = os.getcwd()
@@ -102,3 +102,4 @@ def web_scraping():
 if __name__ == "__main__":
     threading.Thread(target=telegram_bot).start()
     threading.Thread(target=web_scraping).start()
+          
